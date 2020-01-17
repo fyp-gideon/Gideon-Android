@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".MainScreen">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/gideon"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <VideoView
+        android:id="@+id/livefeed"
+        android:layout_width="341dp"
+        android:layout_height="253dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/currentCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="11dp"
+        android:text="@string/_1"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/nextCam"
+        app:layout_constraintStart_toEndOf="@+id/prevCam"
+        app:layout_constraintTop_toBottomOf="@+id/livefeed" />
+
+    <ImageButton
+        android:id="@+id/prevCam"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="24dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#00FFFFFF"
+        android:tint="#03FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/currentCamera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/livefeed"
+        app:srcCompat="@drawable/ic_back"
+        android:contentDescription="@string/todo" />
+
+    <ImageButton
+        android:id="@+id/nextCam"
+        android:layout_width="24dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="166dp"
+        android:backgroundTint="#00FFFFFF"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/currentCamera"
+        app:layout_constraintTop_toBottomOf="@+id/livefeed"
+        app:srcCompat="@drawable/ic_next"
+        android:contentDescription="@string/todo" />
+
+    <Button
+        android:id="@+id/signOutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_corner"
+        android:text="@string/signOut"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gideon</string>
+    <string name="gideon">Gideon</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="signOut">Sign Out</string>
+    <string name="_1">1</string>
+    <string name="todo">TODO</string>
+</resources>
