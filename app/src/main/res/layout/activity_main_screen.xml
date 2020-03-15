@@ -19,11 +19,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <VideoView
+    <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/livefeed"
         android:layout_width="341dp"
         android:layout_height="253dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -83,5 +83,32 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addCameraBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#DAD2D2"
+        android:scaleType="center"
+        app:fabSize="auto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCameraText"
+        app:maxImageSize="36dp"
+        app:srcCompat="@drawable/ic_plus" />
+
+    <TextView
+        android:id="@+id/addCameraText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="193dp"
+        android:layout_marginEnd="58dp"
+        android:text="@string/add_camera"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/livefeed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

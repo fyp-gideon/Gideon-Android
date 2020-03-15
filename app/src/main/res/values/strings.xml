@@ -7,4 +7,8 @@
     <string name="signOut">Sign Out</string>
     <string name="_1">1</string>
     <string name="todo">TODO</string>
+    <string name="add_camera">Add Camera</string>
+    <string name="create_account">Create Account</string>
+    <string name="description">Intelligent Video Analytics</string>
+    <string name="username">Username</string>
 </resources>
