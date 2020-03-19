@@ -11,4 +11,9 @@
     <string name="create_account">Create Account</string>
     <string name="description">Intelligent Video Analytics</string>
     <string name="username">Username</string>
+    <string name="previous_video">Previous Video</string>
+    <string name="next_video">Next Video</string>
+    <string name="personal">Personal</string>
+    <string name="alert_history">Alert History</string>
+    <string name="camera">Camera</string>
 </resources>
