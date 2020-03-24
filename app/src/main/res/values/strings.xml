@@ -16,4 +16,10 @@
     <string name="personal">Personal</string>
     <string name="alert_history">Alert History</string>
     <string name="camera">Camera</string>
+    <string name="recent">Recent</string>
+    <string name="change_name">Change Name</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="save">Save</string>
+    <string name="goto_previous_screen">Goto Previous Screen</string>
 </resources>

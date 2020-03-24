@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_personal"
+    tools:context=".PersonalScreen"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/personal"
+        android:textSize="28sp"
+        android:layout_margin="20sp"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/change_name"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/changeName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/change_email"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/changeEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="textEmailAddress"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/change_password"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/changePassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="textPassword"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/signIn"
+        android:layout_width="200sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="75sp"
+        android:background="@drawable/button_corner"
+        android:text="@string/save"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_backarrow"
+            android:backgroundTint="@color/transparent"
+            android:contentDescription="@string/goto_previous_screen"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25sp"/>
+
+    </RelativeLayout>
+</LinearLayout>
