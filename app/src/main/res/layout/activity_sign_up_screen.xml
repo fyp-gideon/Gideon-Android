@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_signup"
+    tools:context=".SignUpScreen"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        android:textSize="28sp"
+        android:layout_margin="20sp"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/name"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/email"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="textEmailAddress"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/password"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="textPassword"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:text="@string/confirm_password"
+        android:fontFamily="@font/regular"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/confirmPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:backgroundTint="@color/colorWhite"
+        android:inputType="textPassword"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/signIn"
+        android:layout_width="250sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="60sp"
+        android:background="@drawable/button_corner"
+        android:text="@string/create_account"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorWhite"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_backarrow"
+            android:backgroundTint="@color/transparent"
+            android:contentDescription="@string/goto_previous_screen"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25sp"/>
+
+    </RelativeLayout>
+</LinearLayout>

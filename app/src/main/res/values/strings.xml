@@ -22,4 +22,9 @@
     <string name="change_password">Change Password</string>
     <string name="save">Save</string>
     <string name="goto_previous_screen">Goto Previous Screen</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="ip">IP</string>
+    <string name="socket">Socket</string>
+    <string name="remove_camera">Remove Camera</string>
 </resources>

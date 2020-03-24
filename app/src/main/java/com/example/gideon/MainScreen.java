@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class MainScreen extends AppCompatActivity {
 
     private Intent intent;
-    private TextView personalBtn, signOutBtn;
+    private TextView personalBtn, addCameraBtn, signOutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class MainScreen extends AppCompatActivity {
     private void initializeComponents() {
         signOutBtn = findViewById(R.id.signOut);
         personalBtn = findViewById(R.id.personal);
+        addCameraBtn = findViewById(R.id.addCamera);
     }
 
     private void onListeners() {
@@ -39,6 +40,14 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 intent = new Intent(MainScreen.this, PersonalScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        addCameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainScreen.this, AddCameraScreen.class);
                 startActivity(intent);
             }
         });
