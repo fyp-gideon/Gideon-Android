@@ -129,6 +129,11 @@
                 android:textSize="24sp"
                 android:fontFamily="@font/regular"
                 android:layout_gravity="center_horizontal"/>
+
+            <ListView
+                android:id="@+id/recentClips"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
