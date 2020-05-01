@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.ClipsViewAdapter;
 import model.EventsDataModel;
 import network.GetDataService;
 import network.RetrofitClientInstance;
@@ -33,7 +34,7 @@ public class MainScreen extends AppCompatActivity {
     private Runnable runnable;
     private int delay = 5000;
     private GetDataService service;
-    private List<String> dataString;
+    private ArrayList<EventsDataModel> eventsDataList, recentClipsData;
     private int latestEventSerial;
 
     @Override
@@ -48,10 +49,9 @@ public class MainScreen extends AppCompatActivity {
 
     private void initializeComponents() {
         signOutBtn = findViewById(R.id.signOut);
-        personalBtn = findViewById(R.id.personal);
-        addCameraBtn = findViewById(R.id.addCamera);
         recentClipsView = findViewById(R.id.recentClips);
-        dataString = new ArrayList<>();
+        recentClipsData = new ArrayList<>();
+        eventsDataList = new ArrayList<>();
         handler = new Handler();
     }
 
@@ -60,22 +60,6 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 intent = new Intent(MainScreen.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        personalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainScreen.this, PersonalScreen.class);
-                startActivity(intent);
-            }
-        });
-
-        addCameraBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainScreen.this, AddCameraScreen.class);
                 startActivity(intent);
             }
         });
@@ -107,13 +91,19 @@ public class MainScreen extends AppCompatActivity {
 
     private void generateDataList(List<EventsDataModel> dataList){
         if(dataList.size() != 0) {
+            recentClipsData.clear();
             latestEventSerial = dataList.get(dataList.size() - 1).getEvent_serial();
-            for (EventsDataModel i : dataList) {
-                dataString.add(i.toString());
+
+            eventsDataList.addAll(dataList);
+
+            for(int i = eventsDataList.size()-1; i > eventsDataList.size()-6; i--) {
+                recentClipsData.add(eventsDataList.get(i));
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataString);
-            recentClipsView.setAdapter(arrayAdapter);
+            ArrayAdapter clipAdapter = new ClipsViewAdapter(this, recentClipsData);
+
+            recentClipsView.setAdapter(null);
+            recentClipsView.setAdapter(clipAdapter);
         }
     }
 
