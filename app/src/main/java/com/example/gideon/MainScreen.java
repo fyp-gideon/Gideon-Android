@@ -1,16 +1,29 @@
 package com.example.gideon;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +39,23 @@ import retrofit2.Response;
 public class MainScreen extends AppCompatActivity {
 
     private Intent intent;
-    private TextView personalBtn, addCameraBtn, signOutBtn;
+    private TextView signOutBtn;
+    private VideoView videoView;
 
     private ListView recentClipsView;
     private ProgressDialog progressDialog;
     private Handler handler;
     private Runnable runnable;
-    private int delay = 5000;
     private GetDataService service;
-    private ArrayList<EventsDataModel> eventsDataList, recentClipsData;
+    private ArrayList<EventsDataModel> clipsData, allClipsData;
+    private SwitchMaterial eventToggle;
+    private TextView eventTitleText;
+    private NotificationCompat.Builder builder;
+    private  NotificationChannel channel;
+
     private int latestEventSerial;
+    private int delay = 5000;
+    private boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +70,40 @@ public class MainScreen extends AppCompatActivity {
     private void initializeComponents() {
         signOutBtn = findViewById(R.id.signOut);
         recentClipsView = findViewById(R.id.recentClips);
-        recentClipsData = new ArrayList<>();
-        eventsDataList = new ArrayList<>();
+        videoView = findViewById(R.id.videoFeed);
+        eventToggle = findViewById(R.id.event_toggle);
+        eventTitleText = findViewById(R.id.event_title_text);
+
+        MediaController mediaController = new MediaController(videoView.getContext());
+        videoView.setMediaController(mediaController);
+
+        allClipsData = new ArrayList<>();
+        clipsData = new ArrayList<>();
         handler = new Handler();
+
+        // Notification Builder
+        builder = new NotificationCompat.Builder(this, "1")
+                    .setSmallIcon(R.drawable.ic_next)
+                    .setContentTitle("Alert")
+                    .setContentText("New Event Occurred.")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        createNotificationChannel();
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Alert..";
+            String description = "New Event..";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void onListeners() {
@@ -63,6 +114,31 @@ public class MainScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        recentClipsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EventsDataModel event = clipsData.get(i);
+                videoView.setVideoPath(event.getClip_url());
+                videoView.start();
+            }
+        });
+
+        eventToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    eventTitleText.setText("All Events");
+                    generateDataList(allClipsData);
+                }
+                else {
+                    eventTitleText.setText("Recent");
+                    checked = true;
+                    generateDataList(allClipsData);
+                }
+            }
+        });
     }
 
     private void setRetrofitInstance(){
@@ -70,15 +146,17 @@ public class MainScreen extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-        /*Create handle for the RetrofitInstance interface*/
+//        Create handle for the RetrofitInstance interface
         service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<List<EventsDataModel>> call = service.getAllData();
         call.enqueue(new Callback<List<EventsDataModel>>() {
             @Override
             public void onResponse(Call<List<EventsDataModel>> call, Response<List<EventsDataModel>> response) {
                 progressDialog.dismiss();
-                if(response.body() != null)
+                if(response.body() != null){
+                    allClipsData.addAll(response.body());
                     generateDataList(response.body());
+                }
             }
 
             @Override
@@ -91,17 +169,17 @@ public class MainScreen extends AppCompatActivity {
 
     private void generateDataList(List<EventsDataModel> dataList){
         if(dataList.size() != 0) {
-            recentClipsData.clear();
-            latestEventSerial = dataList.get(dataList.size() - 1).getEvent_serial();
+            clipsData.clear();
 
-            eventsDataList.addAll(dataList);
+            latestEventSerial = dataList.get(dataList.size()-1).getEvent_serial();
 
-            for(int i = eventsDataList.size()-1; i > eventsDataList.size()-6; i--) {
-                recentClipsData.add(eventsDataList.get(i));
-            }
+            if(eventToggle.isChecked())
+                clipsData.addAll(dataList);
+            else
+                for (int i = allClipsData.size() - 1; i >= allClipsData.size() - 5; i--)
+                    clipsData.add(allClipsData.get(i));
 
-            ArrayAdapter clipAdapter = new ClipsViewAdapter(this, recentClipsData);
-
+            ArrayAdapter clipAdapter = new ClipsViewAdapter(this, clipsData);
             recentClipsView.setAdapter(null);
             recentClipsView.setAdapter(clipAdapter);
         }
@@ -119,13 +197,27 @@ public class MainScreen extends AppCompatActivity {
 
     private void getUpdatedData(){
         service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<List<EventsDataModel>> call = service.getUpdatedDataList("/api/events/"+latestEventSerial+"?fetchUpdated=true");
+        Call<List<EventsDataModel>> call;
+
+        call = service.getUpdatedDataList("/api/events/"+latestEventSerial+"?fetchUpdated=true");
+
         call.enqueue(new Callback<List<EventsDataModel>>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<List<EventsDataModel>> call, Response<List<EventsDataModel>> response) {
                 progressDialog.dismiss();
-                if(response.body() != null)
-                    generateDataList(response.body());
+                if(response.body() != null){
+
+                    if(response.body().size() > 0){
+                        if(response.body().get(0).getEvent_serial() > latestEventSerial) {
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainScreen.this);
+                            notificationManager.notify(Integer.parseInt(channel.getId()), builder.build());
+                        }
+
+                        allClipsData.addAll(response.body());
+                        generateDataList(allClipsData);
+                    }
+                }
             }
 
             @Override
@@ -146,11 +238,6 @@ public class MainScreen extends AppCompatActivity {
             }
         }, delay);
         super.onResume();
-    }
-    @Override
-    protected void onPause() {
-        handler.removeCallbacks(runnable); //stop handler when activity not visible super.onPause();
-        super.onPause();
     }
 
     @Override

@@ -40,8 +40,8 @@ public class ClipsViewAdapter extends ArrayAdapter<EventsDataModel> {
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
         builder.build().load(event.getImage_url())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.transparent_background)
+                .error(R.drawable.transparent_background)
                 .into(eventThumbnail);
 
         TextView eventID = listItem.findViewById(R.id.event_serial);
