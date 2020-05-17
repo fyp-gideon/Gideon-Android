@@ -42,7 +42,7 @@ public class MainScreen extends AppCompatActivity {
     private TextView signOutBtn;
     private VideoView videoView;
 
-    private ListView recentClipsView;
+    private ListView clipsListView;
     private ProgressDialog progressDialog;
     private Handler handler;
     private Runnable runnable;
@@ -69,7 +69,7 @@ public class MainScreen extends AppCompatActivity {
 
     private void initializeComponents() {
         signOutBtn = findViewById(R.id.signOut);
-        recentClipsView = findViewById(R.id.recentClips);
+        clipsListView = findViewById(R.id.recentClips);
         videoView = findViewById(R.id.videoFeed);
         eventToggle = findViewById(R.id.event_toggle);
         eventTitleText = findViewById(R.id.event_title_text);
@@ -115,7 +115,7 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
-        recentClipsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        clipsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 EventsDataModel event = clipsData.get(i);
@@ -175,13 +175,18 @@ public class MainScreen extends AppCompatActivity {
 
             if(eventToggle.isChecked())
                 clipsData.addAll(dataList);
-            else
-                for (int i = allClipsData.size() - 1; i >= allClipsData.size() - 5; i--)
-                    clipsData.add(allClipsData.get(i));
+            else {
+                if(allClipsData.size() > 5)
+                    for (int i = allClipsData.size() - 1; i >= allClipsData.size() - 5; i--)
+                        clipsData.add(allClipsData.get(i));
+                else
+                    for (int i = allClipsData.size() - 1; i >= 0; i--)
+                        clipsData.add(allClipsData.get(i));
+            }
 
             ArrayAdapter clipAdapter = new ClipsViewAdapter(this, clipsData);
-            recentClipsView.setAdapter(null);
-            recentClipsView.setAdapter(clipAdapter);
+            clipsListView.setAdapter(null);
+            clipsListView.setAdapter(clipAdapter);
         }
     }
 
