@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "80656847286",
+    "firebase_url": "https://gideon-android.firebaseio.com",
+    "project_id": "gideon-android",
+    "storage_bucket": "gideon-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80656847286:android:fcd0e0752ec48346763117",
+        "android_client_info": {
+          "package_name": "com.example.gideon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80656847286-ifamu19cbiiegjntn4famgl2ou7dih7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gideon",
+            "certificate_hash": "989a9f253d785608d2f13073293d985f1e8f5783"
+          }
+        },
+        {
+          "client_id": "80656847286-tka9jnlult61vjd2b3g8smld7irj5la6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8cwX93bDGNsMZZ5S_EC1tjDVyybxpM_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80656847286-tka9jnlult61vjd2b3g8smld7irj5la6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

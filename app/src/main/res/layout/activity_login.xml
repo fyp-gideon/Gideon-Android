@@ -83,7 +83,7 @@
             android:textColor="@color/colorLightBrown"
             android:textSize="20sp"
             android:inputType="textEmailAddress"
-            android:hint="@string/username"
+            android:hint="@string/email"
             android:backgroundTint="@color/colorWhite"
             tools:ignore="LabelFor"
             android:importantForAutofill="no" />

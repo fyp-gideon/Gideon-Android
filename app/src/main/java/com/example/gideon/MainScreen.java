@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import adapter.ClipsViewAdapter;
 import model.EventsDataModel;
@@ -162,6 +164,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<EventsDataModel>> call, Throwable t) {
                 progressDialog.dismiss();
+                Log.e("MainScreen", Objects.requireNonNull(t.getMessage()));
                 Toast.makeText(MainScreen.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -184,7 +187,7 @@ public class MainScreen extends AppCompatActivity {
                         clipsData.add(allClipsData.get(i));
             }
 
-            ArrayAdapter clipAdapter = new ClipsViewAdapter(this, clipsData);
+            ArrayAdapter<EventsDataModel> clipAdapter = new ClipsViewAdapter(this, clipsData);
             clipsListView.setAdapter(null);
             clipsListView.setAdapter(clipAdapter);
         }
@@ -228,7 +231,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<EventsDataModel>> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(MainScreen.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("MainScreen", Objects.requireNonNull(t.getMessage()));
             }
         });
     }

@@ -97,7 +97,7 @@
         tools:ignore="LabelFor" />
 
     <Button
-        android:id="@+id/signIn"
+        android:id="@+id/createAccount"
         android:layout_width="250sp"
         android:layout_height="50sp"
         android:layout_marginTop="60sp"
